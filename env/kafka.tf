@@ -55,7 +55,10 @@ resource "kubectl_manifest" "kafka_topic" {
       namespace = kubernetes_namespace_v1.kafka.metadata[0].name
     }
     spec = {
-      config     = { "retention.ms" = 7200000, "segment.bytes" = 1073741824 }
+      config = {
+        "retention.ms"  = 7200000 # 2 hours
+        "segment.bytes" = 1073741824 # 1 GiB
+      }
       partitions = 1
       replicas   = 1
     }
