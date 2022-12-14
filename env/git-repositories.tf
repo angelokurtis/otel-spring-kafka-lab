@@ -1,5 +1,10 @@
 locals {
-  git_repositories = {}
+  git_repositories = {
+    kafka-ui = {
+      repository = "https://github.com/provectus/kafka-ui"
+      ref        = { tag = "v0.4.0" }
+    }
+  }
 }
 
 resource "kubectl_manifest" "git_repository" {

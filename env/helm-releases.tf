@@ -5,6 +5,12 @@ locals {
       namespace       = kubernetes_namespace_v1.kafka_operator.metadata[0].name,
       values          = local.kafka_operator,
     }
+    kafka-ui = {
+      git_repository = "kafka-ui"
+      chart          = "charts/kafka-ui"
+      namespace      = kubernetes_namespace_v1.kafka_ui.metadata[0].name,
+      values         = local.kafka_ui,
+    }
   }
 }
 
