@@ -1,10 +1,12 @@
 package com.picpay.producer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 public class Controller {
 
@@ -16,7 +18,9 @@ public class Controller {
 
     @PostMapping(path = "/send/{foo}")
     public void sendFoo(@PathVariable String foo) {
-        this.template.send("mytopic", new Message(foo));
+        Message message = new Message(foo);
+        this.template.send("mytopic", message);
+        log.info("Sent: " + message);
     }
 
 }
