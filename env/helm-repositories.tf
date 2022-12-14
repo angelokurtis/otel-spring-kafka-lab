@@ -1,6 +1,8 @@
 locals {
   helm_repositories = {
-    strimzi = { repository = "https://strimzi.io/charts/" }
+    ingress-nginx = { repository = "https://kubernetes.github.io/ingress-nginx" }
+    jaegertracing = { repository = "https://jaegertracing.github.io/helm-charts" }
+    strimzi       = { repository = "https://strimzi.io/charts/" }
   }
 }
 

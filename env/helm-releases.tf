@@ -11,6 +11,18 @@ locals {
       namespace      = kubernetes_namespace_v1.kafka_ui.metadata[0].name,
       values         = local.kafka_ui,
     }
+    nginx = {
+      namespace       = kubernetes_namespace_v1.nginx.metadata[0].name,
+      chart           = "ingress-nginx",
+      helm_repository = "ingress-nginx",
+      values          = local.nginx,
+    }
+    jaeger = {
+      namespace       = kubernetes_namespace_v1.jaeger.metadata[0].name,
+      helm_repository = "jaegertracing",
+      dependsOn       = [{ name = "nginx", namespace = kubernetes_namespace_v1.nginx.metadata[0].name }],
+      values          = local.jaeger,
+    }
   }
 }
 
