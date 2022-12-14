@@ -8,6 +8,6 @@ import lombok.ToString;
 @Data
 @ToString
 @AllArgsConstructor
-public class PushMessage {
+public class Message {
     private String foo;
 }

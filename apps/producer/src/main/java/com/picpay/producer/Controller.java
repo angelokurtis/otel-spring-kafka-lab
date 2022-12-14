@@ -16,7 +16,7 @@ public class Controller {
 
     @PostMapping(path = "/send/{foo}")
     public void sendFoo(@PathVariable String foo) {
-        this.template.send("mytopic", new PushMessage(foo));
+        this.template.send("mytopic", new Message(foo));
     }
 
 }
