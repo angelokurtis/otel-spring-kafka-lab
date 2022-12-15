@@ -1,8 +1,10 @@
 locals {
   helm_repositories = {
-    haproxy-ingress = { repository = "https://haproxy-ingress.github.io/charts" }
-    jaegertracing   = { repository = "https://jaegertracing.github.io/helm-charts" }
-    strimzi         = { repository = "https://strimzi.io/charts/" }
+    haproxy-ingress      = { repository = "https://haproxy-ingress.github.io/charts" }
+    jaegertracing        = { repository = "https://jaegertracing.github.io/helm-charts" }
+    open-telemetry       = { repository = "https://open-telemetry.github.io/opentelemetry-helm-charts" }
+    prometheus-community = { repository = "https://prometheus-community.github.io/helm-charts" }
+    strimzi              = { repository = "https://strimzi.io/charts/" }
   }
 }
 

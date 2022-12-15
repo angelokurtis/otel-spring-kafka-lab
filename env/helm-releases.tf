@@ -23,6 +23,19 @@ locals {
       dependsOn       = [{ name = "haproxy", namespace = kubernetes_namespace_v1.haproxy.metadata[0].name }],
       values          = local.jaeger,
     }
+    default = {
+      namespace       = kubernetes_namespace_v1.opentelemetry.metadata[0].name,
+      chart           = "opentelemetry-collector",
+      helm_repository = "open-telemetry",
+      dependsOn       = [{ name = "haproxy", namespace = kubernetes_namespace_v1.haproxy.metadata[0].name }],
+      values          = local.opentelemetry_collector,
+    }
+    prometheus = {
+      namespace       = kubernetes_namespace_v1.prometheus.metadata[0].name,
+      helm_repository = "prometheus-community",
+      dependsOn       = [{ name = "haproxy", namespace = kubernetes_namespace_v1.haproxy.metadata[0].name }],
+      values          = local.prometheus,
+    }
   }
 }
 
