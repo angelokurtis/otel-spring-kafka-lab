@@ -6,13 +6,13 @@ locals {
 
 resource "kubectl_manifest" "kafka" {
   server_side_apply = true
-  yaml_body         = yamlencode({
+  yaml_body = yamlencode({
     apiVersion = "kafka.strimzi.io/v1beta2"
     kind       = "Kafka"
     metadata   = { name = "single", namespace = kubernetes_namespace_v1.kafka.metadata[0].name }
-    spec       = {
+    spec = {
       entityOperator = { topicOperator = {}, userOperator = {} }
-      kafka          = {
+      kafka = {
         config = {
           "default.replication.factor"               = 1
           "inter.broker.protocol.version"            = "3.3"
@@ -27,7 +27,7 @@ resource "kubectl_manifest" "kafka" {
           { name = "tls", port = 9093, tls = true, type = "internal" },
         ]
         replicas = 1
-        storage  = {
+        storage = {
           type    = "jbod"
           volumes = [{ deleteClaim = false, id = 0, size = "100Gi", type = "persistent-claim" }]
         }
@@ -47,17 +47,17 @@ resource "kubectl_manifest" "kafka_topic" {
   for_each = toset(local.kafka.topics)
 
   server_side_apply = true
-  yaml_body         = yamlencode({
+  yaml_body = yamlencode({
     apiVersion = "kafka.strimzi.io/v1beta2"
     kind       = "KafkaTopic"
-    metadata   = {
+    metadata = {
       labels    = { "strimzi.io/cluster" = kubectl_manifest.kafka.name }
       name      = each.key
       namespace = kubernetes_namespace_v1.kafka.metadata[0].name
     }
     spec = {
       config = {
-        "retention.ms"  = 7200000 # 2 hours
+        "retention.ms"  = 7200000    # 2 hours
         "segment.bytes" = 1073741824 # 1 GiB
       }
       partitions = 1

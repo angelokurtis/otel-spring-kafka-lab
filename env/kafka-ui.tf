@@ -4,7 +4,7 @@ locals {
       enabled          = true,
       host             = "kafka.${local.cluster_host}",
       path             = "/"
-      ingressClassName = "nginx"
+      ingressClassName = "haproxy"
     }
     envs = {
       config = {

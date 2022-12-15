@@ -29,7 +29,7 @@ resource "kubectl_manifest" "fluxcd" {
 
 resource "kubernetes_namespace" "fluxcd" {
   metadata {
-    name   = local.fluxcd.namespace
+    name = local.fluxcd.namespace
     labels = {
       "app.kubernetes.io/instance" = "fluxcd"
       "app.kubernetes.io/part-of"  = "flux"

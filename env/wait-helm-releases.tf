@@ -65,7 +65,7 @@ resource "kubernetes_role_binding_v1" "helm_release_reader" {
 }
 
 resource "kubernetes_role_v1" "helmreleases_reader" {
-  for_each = toset(distinct([for helm_release in local.helm_releases :helm_release.namespace]))
+  for_each = toset(distinct([for helm_release in local.helm_releases : helm_release.namespace]))
 
   metadata {
     name      = "helmreleases-reader"
