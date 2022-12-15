@@ -52,6 +52,11 @@ processors:
     expected_new_traces_per_sec: 10
     policies: [
       {
+        name: ignore-spring-kafka-listener,
+        type: string_attribute,
+        string_attribute: { key: code.namespace, values: [ org\.springframework\.kafka\.listener\.KafkaMessageListenerContainer\$/* ], enabled_regex_matching: true, invert_match: true }
+      },
+      {
         name: ignore-health-check-requests,
         type: string_attribute,
         string_attribute: { key: http.user_agent, values: [ kube-probe/* ], enabled_regex_matching: true, invert_match: true }
