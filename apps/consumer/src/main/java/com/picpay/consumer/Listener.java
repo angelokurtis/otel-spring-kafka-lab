@@ -1,5 +1,6 @@
 package com.picpay.consumer;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -9,7 +10,10 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
+@AllArgsConstructor
 public class Listener {
+
+    private final Service2 service2;
 
     @Bean
     public RecordMessageConverter converter() {
@@ -18,6 +22,7 @@ public class Listener {
 
     @KafkaListener(topics = "mytopic")
     public void listen(Message message) {
-        log.info("Received: " + message);
+        service2.receive(message);
     }
 }
+
